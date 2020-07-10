@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Router, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Dashboard from "./dashboard/Dashboard";
 import Repository from "./repository/Repository";
