@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { shade } from "polished";
+import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Title = styled.h1`
   font-size: 48px;
@@ -26,7 +26,7 @@ export const Form = styled.form`
     &::placeholder {
       color: #a8a8b3;
     }
-  } 
+  }
 
   button {
     width: 210px;
@@ -34,16 +34,14 @@ export const Form = styled.form`
     background: #04d361;
     border-radius: 0px 5 5 0px;
     border: 0;
-    color: #FFF;
+    color: #fff;
     font-weight: bold;
     transition: background-color 0.2s;
 
     &:hover {
-      background: ${shade(0.2, '#04d361')}
-    } 
-
+      background: ${shade(0.2, '#04d361')};
+    }
   }
-
 `;
 
 export const Repositories = styled.div`
@@ -67,34 +65,32 @@ export const Repositories = styled.div`
 
     & + a {
       margin-top: 16px;
-    } 
+    }
 
     img {
       width: 64px;
-      height: 64px; 
+      height: 64px;
       border-radius: 50%;
     }
 
     div {
-      margin-left:16px;
+      margin-left: 16px;
 
       strong {
         font-size: 20px;
-        color: #3D3D4D;
+        color: #3d3d4d;
       }
 
       p {
         font-size: 20px;
-        color: #A8A8B3;
+        color: #a8a8b3;
         margin-top: 4px;
       }
     }
 
-    svg{
+    svg {
       margin-left: auto;
       color: #cbcbd6;
     }
-
   }
-
 `;
