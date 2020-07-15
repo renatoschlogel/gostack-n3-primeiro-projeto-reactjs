@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 
 import { FiChevronRight } from 'react-icons/fi';
 
@@ -7,34 +7,61 @@ import { Title, Form, Repositories } from './dashboard.styles';
 
 import api from '../../services/api';
 
-const Dashboard: React.FC = () => {
-  const [repositories, setRepositories] = useState([]);
+interface Repository {
+  full_name: string;
+  description: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+  };
+}
 
-  function handleAddRepository() {}
+const Dashboard: React.FC = () => {
+  const [newRepository, setNewRepository] = useState('');
+  const [repositories, setRepositories] = useState<Repository[]>([]);
+
+  async function handleAddRepository(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
+    event.preventDefault(); // não recarregar
+    const response = await api.get(`repos/${newRepository}`);
+    const repository = response.data;
+    setRepositories([...repositories, repository]);
+    setNewRepository('');
+  }
 
   return (
     <>
       <img src={logoImg} alt="Github Explorer" />
       <Title>Olá</Title>
 
-      <Form action="">
-        <input placeholder="Digite o nome do Repositério" />
+      <Form onSubmit={handleAddRepository}>
+        <input
+          value={newRepository}
+          onChange={e => setNewRepository(e.target.value)}
+          placeholder="Digite o nome do Repositério"
+        />
         <button type="submit">Pesquisar</button>
       </Form>
 
       <Repositories>
-        <a href="teste">
+
+        {repositories.map(repository => (
+          <a key={repository.full_name} href="teste">
           <img
-            src="https://avatars0.githubusercontent.com/u/6994181?s=460&u=3cbcbbcce69d20b7547b9d8520df7858e5f6e40f&v=4"
-            alt="Renato W Schlogel"
+            src={repository.owner.avatar_url}
+            alt={repository.owner.login}
           />
           <div>
-            <strong>renatoschlogel/be-the-hero</strong>
-            <p>Be The Hero</p>
+            <strong>{repository.full_name}</strong>
+            <p>{repository.description}</p>
           </div>
 
           <FiChevronRight size={20} />
-        </a>
+          </a>
+
+        ))}
+
       </Repositories>
     </>
   );
