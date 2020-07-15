@@ -34,8 +34,7 @@
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
-        "allowExpressions": true,
-        "ignoreDestructuring":true
+        "allowExpressions": true
       }
     ],
     "import/extensions": [
